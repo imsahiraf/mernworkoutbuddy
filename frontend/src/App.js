@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthContext } from './hooks/useAuthContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+// import { useAuthContext } from './hooks/useAuthContext'
 
 // pages & components
 import Home from './pages/Home'
@@ -9,8 +11,19 @@ import Navbar from './components/Navbar'
 import EmailVerify from './components/EmailVerify'
 
 function App() {
-  const { user } = useAuthContext()
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    if (user) {
+      dispatch({ type: 'LOGIN', payload: user }) 
+    }
+  }, [])
+
+  const { user } = useSelector((state) => state.authReducer)
+  
   return (
     <div className="App">
       <BrowserRouter>

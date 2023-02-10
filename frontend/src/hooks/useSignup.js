@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useAuthContext } from './useAuthContext'
+import { useSelector, useDispatch } from 'react-redux'
+// import { useAuthContext } from './useAuthContext'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
   const [msg, setMsg] = useState("");
-  const { dispatch } = useAuthContext()
+  const { dispatch } = useDispatch()
 
   const signup = async (email, password) => {
     setIsLoading(true)

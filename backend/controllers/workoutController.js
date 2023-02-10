@@ -5,9 +5,18 @@ const mongoose = require('mongoose')
 const getWorkouts = async (req, res) => {
   const user_id = req.user._id
 
-  const workouts = await Workout.find({user_id}).sort({createdAt: -1})
+  const page = req.query.page;
+  
+  const limit = 5;
 
-  res.status(200).json(workouts)
+  const startIndex = (Number(page) - 1) * limit;
+
+  const total = await Workout.countDocuments({user_id});
+
+  const workouts = await Workout.find({user_id}).sort({createdAt: -1}).limit(limit).skip(startIndex)
+
+  res.status(200).json({data: workouts, currentPage: Number(page), noOfPages: Math.ceil(total / limit), total: total})
+
 }
 
 // get a single workout

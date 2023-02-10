@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useSelector, useDispatch } from 'react-redux'
 
 const WorkoutForm = () => {
-  const { dispatch } = useWorkoutsContext()
-  const { user } = useAuthContext()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.authReducer)
 
   const [title, setTitle] = useState('')
   const [load, setLoad] = useState('')

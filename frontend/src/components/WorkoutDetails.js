@@ -1,12 +1,12 @@
-import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useSelector, useDispatch } from 'react-redux'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const WorkoutDetails = ({ workout }) => {
-  const { dispatch } = useWorkoutsContext()
-  const { user } = useAuthContext()
+  const dispatch = useDispatch()
+  
+  const { user } = useSelector((state) => state.authReducer)
 
   const handleClick = async () => {
     if (!user) {
