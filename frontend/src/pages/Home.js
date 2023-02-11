@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // components
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from '../components/WorkoutForm'
+import SearchBox from '../components/SearchBox'
 
 const Home = () => {
 
@@ -74,6 +75,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="workouts">
+      <SearchBox/>
         {workouts && workouts.map((workout) => (
           <WorkoutDetails key={workout._id} workout={workout} />
         ))}

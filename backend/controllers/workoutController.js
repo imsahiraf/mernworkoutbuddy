@@ -102,11 +102,26 @@ const updateWorkout = async (req, res) => {
   res.status(200).json(workout)
 }
 
+// Search workout
+const searchWorkout = async (req, res) => {
+
+  const search = req.params.search
+  
+  const workout = await Workout.find({title: {$regex: search, $options: 'i'}})
+
+  if (!workout) {
+    return res.status(400).json({error: 'No such workout'})
+  }
+  
+  res.status(200).json(workout)
+  
+}
 
 module.exports = {
   getWorkouts,
   getWorkout,
   createWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
+  searchWorkout
 }

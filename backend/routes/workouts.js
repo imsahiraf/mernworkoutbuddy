@@ -4,7 +4,8 @@ const {
   getWorkouts,
   getWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
+  searchWorkout
 } = require('../controllers/workoutController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -27,6 +28,9 @@ router.delete('/:id', deleteWorkout)
 
 // UPDATE a workout
 router.patch('/:id', updateWorkout)
+
+// Search from workouts
+router.get('/search/:search', searchWorkout)
 
 
 module.exports = router

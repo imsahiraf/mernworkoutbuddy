@@ -1,16 +1,22 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {login, error, isLoading} = useLogin()
+  const {login, error, isLoading, handleCaptcha} = useLogin()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     await login(email, password)
+    
   }
+  
+  // const handleCaptcha = () => {
+  //   setIsLoading(false)
+  // }
 
   return (
     <form className="login" onSubmit={handleSubmit}>
@@ -28,7 +34,10 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)} 
         value={password} 
       />
-
+      <ReCAPTCHA
+        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        onChange={handleCaptcha}
+      />
       <button disabled={isLoading}>Log in</button>
       {error && <div className="error">{error}</div>}
     </form>
