@@ -35,7 +35,7 @@ const Login = () => {
         value={password} 
       />
       <ReCAPTCHA
-        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        sitekey="6Le5LXwkAAAAACRCn5jPPDVnzd9LEKsblHyFl7IS"
         onChange={handleCaptcha}
       />
       <button disabled={isLoading}>Log in</button>

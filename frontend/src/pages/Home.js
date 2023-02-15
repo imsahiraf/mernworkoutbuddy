@@ -1,11 +1,12 @@
-import { useEffect, useState }from 'react'
+import { useEffect, useState, Suspense, lazy }from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 
 // components
-import WorkoutDetails from '../components/WorkoutDetails'
+// import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from '../components/WorkoutForm'
 import SearchBox from '../components/SearchBox'
+const WorkoutDetails = lazy(()=>import('../components/WorkoutDetails'))
 
 const Home = () => {
 
@@ -76,9 +77,11 @@ const Home = () => {
     <div className="home">
       <div className="workouts">
       <SearchBox/>
+        <Suspense fallback={<p>Please wait while loading</p>}>
         {workouts && workouts.map((workout) => (
           <WorkoutDetails key={workout._id} workout={workout} />
         ))}
+        </Suspense>
         {/* <div id="paginated"></div> */}
         {/* <Pagination totalPages = {json.noOfPages}/> */}
         <ul className="pagination mt-30" id="pagination">

@@ -2,6 +2,9 @@ require('dotenv').config();
 
 module.exports = () => {
     const transportor = process.env.mailservice+'transport'
+    // if (typeof new eval(transportor) === "object") {
+    //     console.log('Yes Confirm')
+    // }
     return eval(transportor).transport()
 }   
 
